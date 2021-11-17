@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import Board from './Board'
 import Footer from './Footer'
+import ItemContext from './context'
+
 // const [getItem, setItem] = useStorage()
 
 const App = () => {
@@ -31,19 +33,26 @@ const init = {
         user: 'Gosia'}
     ]
 }
-
+console.log(ItemContext);
 const [state, setState] = useState(init);
-console.log(state.column)
-
+// const [getItem, setItem] = useStorage();
+// const 
+// console.log(state.tasks)
 localStorage.setItem("tasksList", JSON.stringify(state.tasks))
 localStorage.setItem("columnsList", JSON.stringify(state.column))
 // const [state, dispatch] = useReducer (reducer, init)
 
+const tasks = JSON.parse(localStorage.getItem("tasksList"));
+const columns = JSON.parse(localStorage.getItem("columnsList"))
+
+
     return (
-        <> 
+        // <ItemContext.Provider value= {init}>
+        < >
             <Board/>
             <Footer/>
         </>
+        // </ItemContext.Provider>
     )
 }
 

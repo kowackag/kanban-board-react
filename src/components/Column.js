@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import ItemContext from './context';
 import Task from './Task';
+
 const Column = () => {
-    const tasks = JSON.parse(localStorage.getItem("tasksList"));
-    const columns = JSON.parse(localStorage.getItem("columnsList"))
+    const {columns, tasks}  = useContext(ItemContext);
     return (
         <>
             <ul>

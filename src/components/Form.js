@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useContext} from 'react';
 
 const Form = () => {
 
@@ -7,10 +7,11 @@ const Form = () => {
         user: '',
         deadline: ''
     }
+
     const reducer = (state, action) => {
         switch (action.type) {
-        // case 'reset':
-        //     return init;
+        case 'reset':
+            return init;
         case 'change':
             const {name, value} = action.element;
             return {...state, [name]:value};
@@ -18,17 +19,39 @@ const Form = () => {
             return state;
         }
     }
-
+    
     const [state, dispatch] = useReducer(reducer, init);
     const {name, user, deadline} = state;
-
+    // const [task, setTask] = useState([])
+    // console.log(state)
+    const handleForm = (e) => {
+        e.preventDefault();
+        // const errors = ValidateData(state)
+        // if (errors.length === 0) {
+            console.log(state)
+            // setTask(state);
+            // console.log(task)
+            dispatch({type: 'reset'});
+            // emailjs.sendForm(serviceID, templateID, e.target, userID) 
+            //     .then((result) => {
+            //         console.log('SUCCESS!', result);
+            //     }, (error)=> {
+            //         console.log('FAILED...', error.text);
+            //     });
+        // }
+        // const copyErrors = errors.map(error=>{
+        //     return {text: error, id: uuid()}});
+        // setErr(copyErrors);
+        // setTask(state);
+    }
+    // console.log(task)
     return (
         <>
             <h2>Dodaj zadanie</h2>
-                <form >
-                    <label htmlFor="name">Nazwa zadania<input name="name" value={name}onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                    <label htmlFor="user">Wykonawca<input name="user" value={user}/></label>
-                    <label htmlFor="deadline">Termin realizacji<input name="deadline" value={deadline}/></label>
+                <form onSubmit={(e)=> handleForm(e)}>
+                    <label htmlFor="name">Nazwa zadania<input name="name" value={name} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
+                    <label htmlFor="user">Wykonawca<input name="user" value={user} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
+                    <label htmlFor="deadline">Termin realizacji<input name="deadline" value={deadline} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
                     <input value= 'Dodaj' type="submit"/>    
                 </form>
         </>
