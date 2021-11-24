@@ -1,4 +1,6 @@
 import React, {useReducer, useContext} from 'react';
+import ItemContext from './context';
+import {useStorage} from './Hooks'
 
 const Form = () => {
 
@@ -23,12 +25,14 @@ const Form = () => {
     const [state, dispatch] = useReducer(reducer, init);
     const {name, user, deadline} = state;
     // const [task, setTask] = useState([])
-    // console.log(state)
+    const {tasks} = useContext(ItemContext);
+    console.log(state)
+    const [getItem, setItem] = useStorage();
     const handleForm = (e) => {
         e.preventDefault();
-        // const errors = ValidateData(state)
-        // if (errors.length === 0) {
-            console.log(state)
+        const copyTaskList = [...tasks, state];
+        console.log("copyTaskList", copyTaskList);
+        console.log('state', state)
             // setTask(state);
             // console.log(task)
             dispatch({type: 'reset'});
@@ -48,12 +52,12 @@ const Form = () => {
     return (
         <>
             <h2>Dodaj zadanie</h2>
-                <form onSubmit={(e)=> handleForm(e)}>
-                    <label htmlFor="name">Nazwa zadania<input name="name" value={name} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                    <label htmlFor="user">Wykonawca<input name="user" value={user} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                    <label htmlFor="deadline">Termin realizacji<input name="deadline" value={deadline} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                    <input value= 'Dodaj' type="submit"/>    
-                </form>
+            <form onSubmit={(e)=> handleForm(e)}>
+                <label htmlFor="name">Nazwa zadania<input name="name" value={name} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
+                <label htmlFor="user">Wykonawca<input name="user" value={user} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
+                <label htmlFor="deadline">Termin realizacji<input name="deadline" value={deadline} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
+                <input value= 'Dodaj' type="submit"/>    
+            </form>
         </>
     )
 }

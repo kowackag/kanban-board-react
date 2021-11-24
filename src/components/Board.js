@@ -6,7 +6,7 @@ const Board = ()=>{
     return (
         <>
             <h1>Terminarz zadań</h1>
-            <Form/>
+            {/* <Form/> */}
             <Column/>  
         </>
     )

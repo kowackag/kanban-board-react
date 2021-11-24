@@ -12,7 +12,7 @@ const init = {
     ], 
     
     tasks: [
-        {id: 1, name:'kanban', idColumn: 1, user: 'Ania'},
+       
     ]
 }
 
