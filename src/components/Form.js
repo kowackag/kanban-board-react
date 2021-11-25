@@ -1,13 +1,12 @@
 import React, {useReducer, useContext} from 'react';
-import ItemContext from './context';
-import {useStorage} from './Hooks'
 
-const Form = () => {
-
-    const init ={
+const Form = (props) => {
+    const {updateData}= props;
+     const init ={
         name: '',
         user: '',
-        deadline: ''
+        deadline: '',
+        idColumn: 1
     }
 
     const reducer = (state, action) => {
@@ -15,7 +14,7 @@ const Form = () => {
         case 'reset':
             return init;
         case 'change':
-            const {name, value} = action.element;
+            const {name, value, idColumn} = action.element;
             return {...state, [name]:value};
         default:
             return state;
@@ -23,38 +22,30 @@ const Form = () => {
     }
     
     const [state, dispatch] = useReducer(reducer, init);
-    const {name, user, deadline} = state;
-    // const [task, setTask] = useState([])
-    const {tasks} = useContext(ItemContext);
-    console.log(state)
-    const [getItem, setItem] = useStorage();
+    const {name, user, deadline, idColumn} = state;
     const handleForm = (e) => {
         e.preventDefault();
-        const copyTaskList = [...tasks, state];
-        console.log("copyTaskList", copyTaskList);
-        console.log('state', state)
-            // setTask(state);
-            // console.log(task)
-            dispatch({type: 'reset'});
-            // emailjs.sendForm(serviceID, templateID, e.target, userID) 
-            //     .then((result) => {
-            //         console.log('SUCCESS!', result);
-            //     }, (error)=> {
-            //         console.log('FAILED...', error.text);
-            //     });
-        // }
-        // const copyErrors = errors.map(error=>{
-        //     return {text: error, id: uuid()}});
-        // setErr(copyErrors);
-        // setTask(state);
+        updateData(state)
+        dispatch({type: 'reset'});
     }
-    // console.log(task)
     return (
         <>
             <h2>Dodaj zadanie</h2>
             <form onSubmit={(e)=> handleForm(e)}>
                 <label htmlFor="name">Nazwa zadania<input name="name" value={name} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
                 <label htmlFor="user">Wykonawca<input name="user" value={user} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
+                <label htmlFor="stage">Faza realizacji
+                <select data-placeholder="Faza realizacji" name="stage">
+                    <option name="idColumn" value="0"></option>
+                    <option name="idColumn" value="2">Do zrobienia</option>
+                    <option name="idColumn" value="3">Analiza zadania - W trakcie</option>
+                    <option name="idColumn" value="4">Analiza zadania - Gotowe</option>
+                    <option name="idColumn" value="5">Development - W trakcie</option>
+                    <option name="idColumn" value="6">Development - Gotowe</option>
+                    <option name="idColumn" value="7">Testowanie</option>
+                    <option name="idColumn" value="8">Zakończone</option>
+                </select>
+                </label>
                 <label htmlFor="deadline">Termin realizacji<input name="deadline" value={deadline} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
                 <input value= 'Dodaj' type="submit"/>    
             </form>

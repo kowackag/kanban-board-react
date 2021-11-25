@@ -18,17 +18,29 @@ const init = {
     tasks: []
 }
 const [getItem, setItem] = useStorage();
-// useEffect ( () => {
-//     setItem(init, 'data')
-// }, [])
-const [data, setData]= useState(getItem('data'));
-console.log(data)
-const {columns, tasks} =data;
 
+let fromLocalStorage = getItem('data');
+if(fromLocalStorage === null) {
+    fromLocalStorage = init; 
+}
+
+const [data, setData]= useState(fromLocalStorage)
+const {columns, tasks} = data;
+console.log(tasks);
+
+const updateData = (newTask) => {
+    const copyTasks = [...tasks, newTask]
+    const updatedData ={
+        columns: columns,
+        tasks: [...tasks, newTask]
+    }
+    setData(updatedData);
+    setItem(updatedData, "data");
+    console.log(updatedData)
+}
     return (
-    
        <ItemContext.Provider value ={data}>
-            <Board/>
+            <Board updateData={updateData}/>
             <Footer/>
         </ItemContext.Provider>
     )
