@@ -9,7 +9,7 @@ const Column = () => {
             {columns.map(el=>
             <li>
                 <h3>{`${el.name}`}</h3>
-                <Task tasks = {tasks.filter(task => task.idColumn === el.id)}/>
+                <Task tasks = {tasks.filter(task => Number(task.idColumn) === el.id)}/>
             </li>)} 
         </ul>
     )
