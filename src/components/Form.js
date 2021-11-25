@@ -1,4 +1,6 @@
-import React, {useReducer, useContext} from 'react';
+import React, {useReducer, useContext, useState} from 'react';
+import {validateData} from './validateData';
+import {v4 as uuid} from 'uuid';
 
 const Form = (props) => {
     const {updateData}= props;
@@ -15,7 +17,6 @@ const Form = (props) => {
             return init;
         case 'change':
             const {name, value} = action.element;
-            console.log(action.element)
             return {...state, [name]:value};
         default:
             return state;
@@ -24,11 +25,23 @@ const Form = (props) => {
     
     const [state, dispatch] = useReducer(reducer, init);
     const {name, user, deadline, idColumn} = state;
+    const [err, setErr] = useState([])
+
     const handleForm = (e) => {
         e.preventDefault();
-        updateData(state)
-        dispatch({type: 'reset'});
+        console.log(state)
+        const errors = validateData(state);
+        console.log(errors.length)
+        if (errors.length === 0){
+            
+            updateData(state)
+            dispatch({type: 'reset'});
+        }
+        const copyErrors = errors.map(error=>{
+            return {text: error, id: uuid()}});
+        setErr(copyErrors);
     }
+
     return (
         <>
             <h2>Dodaj zadanie</h2>
@@ -52,9 +65,7 @@ const Form = (props) => {
             </form>
             <section>
                 <p>Wprowadzono błędne dane:</p>
-                <ul>
-                    
-                </ul>
+                {err.length > 0 && <ul>{err.map(({text, id})=><li key={id}>{text}</li>)}</ul>}
             </section>
         </>
     )

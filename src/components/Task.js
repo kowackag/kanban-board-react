@@ -7,6 +7,7 @@ const Task = (props) => {
             <li>
                 <h4>{el.name}</h4>
                 <p>{el.user}</p>
+                <p>{el.deadline}</p>
             </li>
         )}</ul>
     )

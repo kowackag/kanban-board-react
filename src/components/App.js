@@ -36,7 +36,6 @@ const updateData = (newTask) => {
     }
     setData(updatedData);
     setItem(updatedData, "data");
-    console.log(updatedData)
 }
     return (
        <ItemContext.Provider value ={data}>
