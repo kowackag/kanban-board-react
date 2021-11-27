@@ -44,21 +44,22 @@ const App = () => {
                 setData(updatedData);
                 setItem(updatedData, "data"); 
             } 
-            // else if (action == 'moveRight') {
-            //     console.log(newTask)
-            //     const copyTask = {...newTask, idColumn: newTask.idColumn + 1}
-            //     console.log('copyTask', copyTask)
-            //     let updatedData = {
-            //         columns: columns,
-            //         tasks: tasks.map(item=> {
-            //             if (item.id == newTask.id)  {
-            //                 return copyTask
-            //             }})
-            //     }
-            //     console.log(updatedData)
-            //     setData(updatedData);
-            //     setItem(updatedData, "data");      
-            // }  
+            else if (action == 'moveRight') {
+                console.log(newTask)
+                const copyTask = {...newTask, idColumn: Number(newTask.idColumn) + 1}
+                console.log('copyTask', copyTask)
+                let updatedData = {
+                    columns: columns,
+                    tasks: tasks.map(item=> {
+                        if (item.id == newTask.id)  {
+                            return copyTask
+                        } else {return item}
+                    })
+                }
+                console.log(updatedData)
+                setData(updatedData);
+                setItem(updatedData, "data");      
+            }  
     }
     
     return (
