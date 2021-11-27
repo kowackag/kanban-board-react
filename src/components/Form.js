@@ -1,10 +1,12 @@
 import React, {useReducer, useContext, useState} from 'react';
+import {ItemContext, UpdateContext} from './context';
 import {validateData} from './validateData';
 import {v4 as uuid} from 'uuid';
 
-const Form = (props) => {
-    const {updateData}= props;
+const Form = () => {
+
      const init ={
+        id: uuid(),
         name: '',
         user: '',
         deadline: '',
@@ -26,16 +28,33 @@ const Form = (props) => {
     const [state, dispatch] = useReducer(reducer, init);
     const {name, user, deadline, idColumn} = state;
     const [err, setErr] = useState([])
+    const {tasks, columns} = useContext(ItemContext);
+    const updateData = useContext(UpdateContext);
+
+    const countTasksInColumn = (tasks, idColumn) => {
+        const numberTasksInColumn = tasks.filter(item => Number(item.idColumn) === idColumn).length;
+        return numberTasksInColumn;
+    }
+
+    const checkIfIsUnderLimit = (tasks, newTask, columns) => {
+        const {idColumn} = newTask;
+        const thatColumn = columns.find((item) => Number(idColumn) === Number(item.id));
+        const {id, limit} = thatColumn;
+        const tasksInColumn = countTasksInColumn(tasks, Number(id))
+        if (tasksInColumn<limit) {
+            return true;
+        } else return false
+    }
 
     const handleForm = (e) => {
         e.preventDefault();
         console.log(state)
         const errors = validateData(state);
-        console.log(errors.length)
         if (errors.length === 0){
-            
-            updateData(state)
-            dispatch({type: 'reset'});
+            if (checkIfIsUnderLimit(tasks, state, columns)) {
+                updateData(state, 'add')
+                dispatch({type: 'reset'});
+            } else alert('Przekroczono limit zadań w danej Fazie realizacji')
         }
         const copyErrors = errors.map(error=>{
             return {text: error, id: uuid()}});

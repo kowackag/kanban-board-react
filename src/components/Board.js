@@ -2,12 +2,11 @@ import React from 'react';
 import Column from './Column';
 import Form from './Form'
 
-const Board = (props)=>{
-    const {updateData} = props
+const Board = ()=>{
     return (
         <>
             <h1>Terminarz zadań</h1>
-            <Form updateData={updateData}/>
+            <Form/>
             <Column/>  
         </>
     )

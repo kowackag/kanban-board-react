@@ -13,6 +13,7 @@ const init = {
     tasks: []
 }
 
-const ItemContext = React.createContext(init);
+const ItemContext = React.createContext();
+const UpdateContext = React.createContext();
 
-export default ItemContext;
+export {ItemContext, UpdateContext};

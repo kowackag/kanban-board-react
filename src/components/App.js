@@ -1,46 +1,72 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import Board from './Board'
 import Footer from './Footer'
-import ItemContext from './context'
+import {ItemContext, UpdateContext} from './context'
 import {useStorage} from './Hooks'
 const App = () => {
 
-const init = {
-    columns: [
-        {id: 1, name: 'Do zrobienia', limit: 5},
-        {id: 2, name: 'Analiza - W trakcie', limit: 5},
-        {id: 3, name: 'Analiza - Gotowe', limit: 5},
-        {id: 4, name: 'Development - W trakcie', limit: 5},
-        {id: 5, name: 'Development - Gotowe', limit: 5},
-        {id: 6, name: 'Testowanie', limit: 5},
-        {id: 7, name: 'Zakończone', limit: 1000},
-    ],   
-    tasks: []
-}
-
-const [getItem, setItem] = useStorage();
-
-let fromLocalStorage = getItem('data');
-if(fromLocalStorage === null) {
-    fromLocalStorage = init; 
-}
-
-const [data, setData]= useState(fromLocalStorage)
-const {columns, tasks} = data;
-console.log(tasks);
-
-const updateData = (newTask) => {
-    const updatedData ={
-        columns: columns,
-        tasks: [...tasks, newTask]
+    const init = {
+        columns: [
+            {id: 1, name: 'Do zrobienia', limit: 5},
+            {id: 2, name: 'Analiza - W trakcie', limit: 5},
+            {id: 3, name: 'Analiza - Gotowe', limit: 5},
+            {id: 4, name: 'Development - W trakcie', limit: 5},
+            {id: 5, name: 'Development - Gotowe', limit: 5},
+            {id: 6, name: 'Testowanie', limit: 5},
+            {id: 7, name: 'Zakończone', limit: 1000},
+        ],   
+        tasks: []
     }
-    setData(updatedData);
-    setItem(updatedData, "data");
-}
+
+    const [getItem, setItem] = useStorage();
+
+    let fromLocalStorage = getItem('data');
+    if (fromLocalStorage === null) {
+        fromLocalStorage = init; 
+    }
+
+    const [data, setData]= useState(fromLocalStorage)
+    const {columns, tasks} = data;
+
+    const updateData = (newTask, action) => {
+        if (action == 'add') {
+                let updatedData = {
+                    columns: columns,
+                    tasks: [...tasks, newTask]
+                }
+                setData(updatedData);
+                setItem(updatedData, "data");
+            } else if (action == 'remove') {
+                let updatedData = {
+                    columns: columns,
+                    tasks: tasks.filter(item=>item.id !== newTask.id)
+                }
+                setData(updatedData);
+                setItem(updatedData, "data"); 
+            } 
+            // else if (action == 'moveRight') {
+            //     console.log(newTask)
+            //     const copyTask = {...newTask, idColumn: newTask.idColumn + 1}
+            //     console.log('copyTask', copyTask)
+            //     let updatedData = {
+            //         columns: columns,
+            //         tasks: tasks.map(item=> {
+            //             if (item.id == newTask.id)  {
+            //                 return copyTask
+            //             }})
+            //     }
+            //     console.log(updatedData)
+            //     setData(updatedData);
+            //     setItem(updatedData, "data");      
+            // }  
+    }
+    
     return (
        <ItemContext.Provider value ={data}>
-            <Board updateData={updateData}/>
-            <Footer/>
+           <UpdateContext.Provider value ={updateData}>
+                <Board/>
+                <Footer/>
+            </UpdateContext.Provider>
         </ItemContext.Provider>
     )
 }
