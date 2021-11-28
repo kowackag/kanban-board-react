@@ -29,12 +29,12 @@ const Task = (props) => {
 
     return(
         <ul>{props.tasks.map((el) =>
-            <li key = {uuid()}>
-                <h4>{el.name}</h4>
-                <button onClick = {() => moveRight(el)}>move</button>
-                <button onClick = {() => removeTask(el)}>Usuń</button>
+            <li className = "task" key = {uuid()}>
+                <h4 className = "task__title">{el.name}</h4>
                 <p>{el.user}</p>
                 <p>{el.deadline}</p>
+                <button className = "task__done btn" onClick = {() => moveRight(el)}>move</button>
+                <button className = "task__remove btn" onClick = {() => removeTask(el)}>Usuń</button>
             </li>
         )}</ul>
     )

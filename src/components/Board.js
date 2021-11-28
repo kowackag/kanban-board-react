@@ -5,7 +5,7 @@ import Form from './Form'
 const Board = ()=>{
     return (
         <>
-            <h1>Terminarz zadań</h1>
+            <h1 className ="title">Terminarz zadań</h1>
             <Form/>
             <Column/>  
         </>

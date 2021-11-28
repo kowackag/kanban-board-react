@@ -1,20 +1,20 @@
-import React, {useState, useContext} from 'react';
-import Board from './Board'
-import Footer from './Footer'
-import {ItemContext, UpdateContext} from './context'
-import {useStorage} from './Hooks'
+import React, {useState} from 'react';
+import Board from './Board';
+import Footer from './Footer';
+import {ItemContext, UpdateContext} from './context';
+import {useStorage} from './Hooks';
+import '../styles/main.css';
+
 const App = () => {
 
     const init = {
         columns: [
             {id: 1, name: 'Do zrobienia', limit: 5},
-            {id: 2, name: 'Analiza - W trakcie', limit: 5},
-            {id: 3, name: 'Analiza - Gotowe', limit: 5},
-            {id: 4, name: 'Development - W trakcie', limit: 5},
-            {id: 5, name: 'Development - Gotowe', limit: 5},
-            {id: 6, name: 'Testowanie', limit: 5},
-            {id: 7, name: 'Zakończone', limit: 1000},
-        ],   
+            {id: 2, name: 'Analiza', limit: 5},
+            {id: 3, name: 'Development', limit: 5},
+            {id: 4, name: 'Testowanie', limit: 5},
+            {id: 5, name: 'Zakończone', limit: 1000},
+        ],    
         tasks: []
     }
 

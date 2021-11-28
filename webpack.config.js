@@ -23,18 +23,18 @@ module.exports = {
                 // określam jaki [loader]
                 // ma być wykorzystany
             },
-            // {
-            //     test: /\.css$/i,
+            {
+                test: /\.css$/i,
             //     // wszystkie pliki, których nazwa
             //     // kończy się na .css
-            //     use: [
-            //         'style-loader',
+                use: [
+                    'style-loader',
             //         // dodaj odczytaną zawartość
             //         // do znacznika <style/>
-            //         'css-loader', 
+                    'css-loader', 
             //         // odczytaj plik CSS
-            //     ],
-            // },
+                ],
+            },
             {
                 test: /\.(woff|woff2)$/,
                 use: {

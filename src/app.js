@@ -4,7 +4,6 @@ import App from './components/App'
 import './styles/main.css';
 
 
-
 ReactDOM.render(
     <App/>,
     document.querySelector('#root')
