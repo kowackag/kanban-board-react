@@ -31,10 +31,10 @@ const Task = (props) => {
         <ul>{props.tasks.map((el) =>
             <li className = "task" key = {uuid()}>
                 <h4 className = "task__title">{el.name}</h4>
-                <p>{el.user}</p>
-                <p>{el.deadline}</p>
-                <button className = "task__done btn" onClick = {() => moveRight(el)}>move</button>
-                <button className = "task__remove btn" onClick = {() => removeTask(el)}>Usuń</button>
+                <p className="task__user">{el.user}</p>
+                <p className="task__user"> {el.deadline}</p>
+                {el.idColumn < 5 && <button className = "task__done btn" onClick = {() => moveRight(el)}><i className="fas fa-check"></i></button>}
+                <button className = "task__remove btn" onClick = {() => removeTask(el)}><i className="far fa-trash-alt"></i></button>
             </li>
         )}</ul>
     )

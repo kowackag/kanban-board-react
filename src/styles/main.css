@@ -16,24 +16,58 @@ body {
     display:flex;
     flex-direction:column;
     justify-content: space-between;
-    /* flex-wrap: wrap; */
-    height: 100vh;
-    height: 100%
+    max-width: 1440px;
+    height: 100%;
+    margin: auto;
 }
 
 .title {
     margin-bottom: 10px;
-    /* border: 1px solid white */
-}
-.section-form {
-    margin-bottom: 10px;
-    border-radius: 10px;
-    background-color: #212121;
-    /* height: 30%; */
-    /* border: 1px solid white; */
 }
 
+/* ------SECTION FORM ------- */
+
+.section-form {
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #212121;
+}
+
+.section-form__title {
+    margin-bottom: 20px;
+}
+
+.form__input {
+    display: inline-block;
+    margin: 0 15px
+}
+
+/* ------SECTION ERRORS ------- */
+
+.errors {
+    margin-bottom: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    border:2px solid #212121;
+    background-color: #5c1e1e;
+}
+
+.errors__title {
+    margin-bottom: 20px;
+}
+
+.errors__item {
+    list-style: none;
+    font-style:italic;
+    line-height: 1.5;
+}
+
+/* ------SECTION KANBAN ------- */
+
 .kanban-board {
+    display: flex;
+    flex-direction: column;
     flex-grow: 2;
     padding: 20px;
     margin-bottom: 10px;
@@ -41,16 +75,19 @@ body {
     background-color: #212121;
     /* border: 1px solid white; */
 }
+
 .kanban-board__title {
     margin-bottom: 20px;
 }
 
 .kanban-board__column {
+    flex-grow: 2;
     height: 90%;
     display: flex;
     justify-content:space-between;
-    /* color:#6D9886; */
 }
+ 
+/* -----COLUMN ----- */
 
 .column {
     flex-basis: auto;
@@ -59,19 +96,32 @@ body {
     padding: 15px 10px;
     border-radius: 8px;
     list-style: none;
-    background-color: #383838
+    background-color: #383838;
 } 
+
 .column__title {
    margin-bottom:15px;
 }
 
+/* -----TASK----- */
+
 .task {
     margin-bottom: 10px;
-    padding:10px;
-    height: 120px;
+    padding: 10px;
     border-radius: 5px;
     background-color: #212121;
     list-style: none;
+    transition:0.5s;
+}
+
+.task:hover {
+    cursor: pointer;
+    transform: scale(1.05,1.05);
+}
+
+.task__user {
+    font-size: 14px;
+    margin: 10px 0;
 }
 
 .task__done {
@@ -85,18 +135,17 @@ body {
 .task__remove {
     background-color: #5c1e1e;
     border-color:#5c1e1e;
-    color: #f1695c;
+    color: #e9968f;
     text-transform: uppercase;
     font-weight:bold;
 }
 
 .btn {
     display: inline-block;
-    margin:10px 5px;
-    width: 60px;
-    height: 25px
+    padding: 5px 8px;
+    margin-right: 10px
 }
 
 .footer {
-    /* border: 1px solid white; */
+    margin: auto;
 }

@@ -30,35 +30,31 @@ const App = () => {
 
     const updateData = (newTask, action) => {
         if (action == 'add') {
-                let updatedData = {
+            let updatedData = {
                     columns: columns,
                     tasks: [...tasks, newTask]
-                }
-                setData(updatedData);
-                setItem(updatedData, "data");
-            } else if (action == 'remove') {
-                let updatedData = {
-                    columns: columns,
-                    tasks: tasks.filter(item=>item.id !== newTask.id)
-                }
-                setData(updatedData);
-                setItem(updatedData, "data"); 
-            } 
-            else if (action == 'moveRight') {
-                console.log(newTask)
-                const copyTask = {...newTask, idColumn: Number(newTask.idColumn) + 1}
-                console.log('copyTask', copyTask)
-                let updatedData = {
-                    columns: columns,
-                    tasks: tasks.map(item=> {
-                        if (item.id == newTask.id)  {
-                            return copyTask
-                        } else {return item}
-                    })
-                }
-                console.log(updatedData)
-                setData(updatedData);
-                setItem(updatedData, "data");      
+            }
+            setData(updatedData);
+            setItem(updatedData, "data");
+        } else if (action == 'remove') {
+            let updatedData = {
+                columns: columns,
+                tasks: tasks.filter(item=>item.id !== newTask.id)
+            }
+            setData(updatedData);
+            setItem(updatedData, "data"); 
+        } else if (action == 'moveRight') {
+            const copyTask = {...newTask, idColumn: Number(newTask.idColumn) + 1}
+            let updatedData = {
+                columns: columns,
+                tasks: tasks.map(item=> {
+                    if (item.id == newTask.id)  {
+                        return copyTask
+                    } else {return item}
+                })
+            }
+            setData(updatedData);
+            setItem(updatedData, "data");      
             }  
     }
     

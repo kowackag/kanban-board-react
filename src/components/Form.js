@@ -31,27 +31,24 @@ const Form = () => {
     const {tasks, columns} = useContext(ItemContext);
     const updateData = useContext(UpdateContext);
 
-    const countTasksInColumn = (tasks, idColumn) => {
-        const numberTasksInColumn = tasks.filter(item => Number(item.idColumn) === idColumn).length;
+    const countTasksInColumn = (id) => {
+        const numberTasksInColumn = tasks.filter(item => Number(item.idColumn) === Number(id)).length;
         return numberTasksInColumn;
     }
 
-    const checkIfIsUnderLimit = (tasks, newTask, columns) => {
+    const checkIfIsUnderLimit = (newTask, columns) => {
         const {idColumn} = newTask;
         const thatColumn = columns.find((item) => Number(idColumn) === Number(item.id));
         const {id, limit} = thatColumn;
-        const tasksInColumn = countTasksInColumn(tasks, Number(id))
-        if (tasksInColumn<limit) {
-            return true;
-        } else return false
+        const tasksInColumn = countTasksInColumn(Number(id))
+        return (tasksInColumn<limit) ? true : false
     }
 
     const handleForm = (e) => {
         e.preventDefault();
-        console.log(state)
         const errors = validateData(state);
         if (errors.length === 0){
-            if (checkIfIsUnderLimit(tasks, state, columns)) {
+            if (checkIfIsUnderLimit(state, columns)) {
                 updateData(state, 'add')
                 dispatch({type: 'reset'});
             } else alert('Przekroczono limit zadań w danej Fazie realizacji')
@@ -62,29 +59,32 @@ const Form = () => {
     }
 
     return (
-        <section className='section-form'>
-            <h2 className='section-form__title'>Dodaj zadanie</h2>
-            <form onSubmit={(e)=> handleForm(e)}>
-                <label htmlFor="name">Nazwa zadania<input name="name" value={name} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                <label htmlFor="user">Wykonawca<input name="user" value={user} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                <label htmlFor="idColumn">Faza realizacji
-                <select name="idColumn" value={idColumn} onChange={(e)=>dispatch({type:'change', element: e.target })}>
-                    <option name="idColumn" value={0} onChange={e=>dispatch({type:'change', element: e.target })}></option>
-                    <option name="idColumn" value={1} onSelect={e=>dispatch({type:'change', element: e.target })}>Do zrobienia</option>
-                    <option name="idColumn" value={2} onClick={e=>dispatch({type:'change', element: e.target })}>Analiza</option>
-                    <option name="idColumn" value={3} onChange={e=>dispatch({type:'change', element: value })}>Development</option>
-                    <option name="idColumn" value={4} onChange={e=>dispatch({type:'change', element: value })}>Testowanie</option>
-                    <option name="idColumn" value={5} onChange={e=>dispatch({type:'change', element: value })}>Zakończone</option>
-                </select>
-                </label>
-                <label htmlFor="deadline">Termin realizacji<input name="deadline" value={deadline} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                <input value= 'Dodaj' type="submit"/>    
-            </form>
-            <section>
-                <p>Wprowadzono błędne dane:</p>
-                {err.length > 0 && <ul>{err.map(({text, id})=><li key={id}>{text}</li>)}</ul>}
-            </section>
-        </section>
+        <>
+            <section className='section-form'>
+                <h3 className='section-form__title'>Dodaj zadanie</h3>
+                <form onSubmit={(e)=> handleForm(e)}>
+                    <label htmlFor="name">Nazwa zadania<input className ="form__input" name="name" value={name} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
+                    <label htmlFor="user">Wykonawca<input className ="form__input" name="user" value={user} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
+                    <label htmlFor="idColumn">Faza realizacji
+                        <select className ="form__input" name="idColumn" value={idColumn} onChange={(e)=>dispatch({type:'change', element: e.target })}>
+                            <option name="idColumn" value={0} onChange={e=>dispatch({type:'change', element: e.target })}></option>
+                            <option name="idColumn" value={1} onSelect={e=>dispatch({type:'change', element: e.target })}>Do zrobienia</option>
+                            <option name="idColumn" value={2} onClick={e=>dispatch({type:'change', element: e.target })}>Analiza</option>
+                            <option name="idColumn" value={3} onChange={e=>dispatch({type:'change', element: value })}>Development</option>
+                            <option name="idColumn" value={4} onChange={e=>dispatch({type:'change', element: value })}>Testowanie</option>
+                            <option name="idColumn" value={5} onChange={e=>dispatch({type:'change', element: value })}>Zakończone</option>
+                        </select>
+                    </label>
+                    <label htmlFor="deadline">Termin realizacji<input className ="form__input" name="deadline" placeholder="RRRR-MM-DD" value={deadline} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
+                    <input className= "btn" value= 'Dodaj' type="submit"/>    
+                </form>
+            </section >{
+                err.length > 0 && <> 
+                <section className="errors">
+                <h3 className="errors__title">Wprowadzono błędne dane:</h3>
+                <ul>{err.map(({text, id})=><li className="errors__item" key={id}>{text}</li>)}</ul> </section></>
+            }
+        </>
     )
 }
 
