@@ -1,4 +1,7 @@
 export const useStorage = () => {
+    const clearItem  = () => {
+        localStorage.clear();
+    }
     const setItem = (ob, name) => {
         localStorage.setItem(name, JSON.stringify(ob))
     }
@@ -7,5 +10,5 @@ export const useStorage = () => {
         return retrivedObject;
     }
    
-    return [getItem, setItem];
+    return [getItem, setItem, clearItem];
 }

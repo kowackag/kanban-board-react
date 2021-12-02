@@ -4,16 +4,16 @@ import {v4 as uuid} from 'uuid';
 
 const Task = (props) => {
     const {tasks, columns} = useContext(ItemContext);
-    const updateData = useContext(UpdateContext);
+    const updateTask = useContext(UpdateContext);
     const removeTask = (item) => {
-        updateData(item, 'remove')
+        updateTask(item, 'remove')
     }
 
     const moveRight = (item) => {
         const numInNextColumn = countTasksInColumn(Number(item.idColumn)+1);
         const limitInNextColumn = countLimitInColumn(Number(item.idColumn)+1);
         if (numInNextColumn < limitInNextColumn ) {
-            updateData(item, 'moveRight');
+            updateTask(item, 'moveRight');
         } else(alert('Zbyt duże obciążenie zadań'))
     }
 

@@ -29,7 +29,7 @@ const Form = () => {
     const {name, user, deadline, idColumn} = state;
     const [err, setErr] = useState([])
     const {tasks, columns} = useContext(ItemContext);
-    const updateData = useContext(UpdateContext);
+    const updateTask = useContext(UpdateContext);
 
     const countTasksInColumn = (id) => {
         const numberTasksInColumn = tasks.filter(item => Number(item.idColumn) === Number(id)).length;
@@ -49,7 +49,7 @@ const Form = () => {
         const errors = validateData(state);
         if (errors.length === 0){
             if (checkIfIsUnderLimit(state, columns)) {
-                updateData(state, 'add')
+                updateTask(state, 'add')
                 dispatch({type: 'reset'});
             } else alert('Przekroczono limit zadań w danej Fazie realizacji')
         }

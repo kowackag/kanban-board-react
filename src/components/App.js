@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Board from './Board';
 import Footer from './Footer';
 import {ItemContext, UpdateContext} from './context';
@@ -18,8 +18,13 @@ const App = () => {
         tasks: []
     }
 
-    const [getItem, setItem] = useStorage();
+    const [getItem, setItem, clearItem] = useStorage();
 
+    // useEffect(()=>{
+    //     clearItem();
+    // },[])
+
+    
     let fromLocalStorage = getItem('data');
     if (fromLocalStorage === null) {
         fromLocalStorage = init; 
@@ -28,21 +33,24 @@ const App = () => {
     const [data, setData]= useState(fromLocalStorage)
     const {columns, tasks} = data;
 
-    const updateData = (newTask, action) => {
+    const updateData = (data)=> {
+        setData(data);
+        setItem(data, "data");
+    }
+
+    const updateTask = (newTask, action) => {
         if (action == 'add') {
             let updatedData = {
                     columns: columns,
                     tasks: [...tasks, newTask]
             }
-            setData(updatedData);
-            setItem(updatedData, "data");
+            updateData(updatedData);
         } else if (action == 'remove') {
             let updatedData = {
                 columns: columns,
                 tasks: tasks.filter(item=>item.id !== newTask.id)
             }
-            setData(updatedData);
-            setItem(updatedData, "data"); 
+            updateData(updatedData);
         } else if (action == 'moveRight') {
             const copyTask = {...newTask, idColumn: Number(newTask.idColumn) + 1}
             let updatedData = {
@@ -53,14 +61,13 @@ const App = () => {
                     } else {return item}
                 })
             }
-            setData(updatedData);
-            setItem(updatedData, "data");      
+            updateData(updatedData); 
             }  
     }
     
     return (
        <ItemContext.Provider value ={data}>
-           <UpdateContext.Provider value ={updateData}>
+           <UpdateContext.Provider value ={updateTask}>
                 <Board/>
                 <Footer/>
             </UpdateContext.Provider>
