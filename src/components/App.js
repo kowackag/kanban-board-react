@@ -12,19 +12,14 @@ const App = () => {
             {id: 1, name: 'Do zrobienia', limit: 5},
             {id: 2, name: 'Analiza', limit: 5},
             {id: 3, name: 'Development', limit: 5},
-            {id: 4, name: 'Testowanie', limit: 5},
+            {id: 4, name: 'Testowanie', limit: 3},
             {id: 5, name: 'Zakończone', limit: 1000},
         ],    
         tasks: []
     }
 
-    const [getItem, setItem, clearItem] = useStorage();
+    const [getItem, setItem] = useStorage();
 
-    // useEffect(()=>{
-    //     clearItem();
-    // },[])
-
-    
     let fromLocalStorage = getItem('data');
     if (fromLocalStorage === null) {
         fromLocalStorage = init; 
