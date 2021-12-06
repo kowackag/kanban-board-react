@@ -6,7 +6,10 @@ const Task = (props) => {
     const {tasks, columns} = useContext(ItemContext);
     const updateTask = useContext(UpdateContext);
     const removeTask = (item) => {
-        updateTask(item, 'remove')
+        const confirmDelete = window.confirm('Czy napewno chcesz usunąć zadanie ?')
+        if (confirmDelete === true){
+            updateTask(item, 'remove')
+        } 
     }
 
     const moveRight = (item) => {

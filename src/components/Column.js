@@ -1,9 +1,6 @@
 import React, {useContext} from 'react';
 import {ItemContext} from './context';
 import Task from './Task';
-import {v4 as uuid} from 'uuid';
-
-// import '../styles/Column.css';
 
 const Column = () => {
     const {tasks, columns} = useContext(ItemContext);
