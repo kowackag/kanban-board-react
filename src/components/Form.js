@@ -58,25 +58,28 @@ const Form = () => {
         setErr(copyErrors);
     }
 
+    const optionList = [
+        {name: 'idColumn', value: 0, title: ''},
+        {name: 'idColumn', value: 1, title: 'Do zrobienia'},
+        {name: 'idColumn', value: 2, title: 'Analiza'},
+        {name: 'idColumn', value: 3, title: 'Development'},
+        {name: 'idColumn', value: 4, title: 'Testowanie'},
+        {name: 'idColumn', value: 5, title: 'Zakończone'}
+    ]
+        
     return (
         <>
             <section className='section-form'>
                 <h3 className='section-form__title'>Dodaj zadanie</h3>
-                <form onSubmit={(e)=> handleForm(e)}>
-                    <label htmlFor="name">Nazwa zadania<input className ="form__input" name="name" value={name} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                    <label htmlFor="user">Wykonawca<input className ="form__input" name="user" value={user} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                    <label htmlFor="idColumn">Faza realizacji
+                <form className ="form" onSubmit={(e)=> handleForm(e)}>
+                    <label htmlFor="name" className="form__label">Nazwa zadania</label><input className ="form__input" name="name" value={name} onChange={e=>dispatch({type:'change', element: e.target })}/>
+                    <label htmlFor="user" className="form__label">Wykonawca</label><input className ="form__input" name="user" value={user} onChange={e=>dispatch({type:'change', element: e.target })}/>
+                    <label htmlFor="idColumn" className="form__label">Faza realizacji</label>
                         <select className ="form__input" name="idColumn" value={idColumn} onChange={(e)=>dispatch({type:'change', element: e.target })}>
-                            <option name="idColumn" value={0} onChange={e=>dispatch({type:'change', element: e.target })}></option>
-                            <option name="idColumn" value={1} onSelect={e=>dispatch({type:'change', element: e.target })}>Do zrobienia</option>
-                            <option name="idColumn" value={2} onClick={e=>dispatch({type:'change', element: e.target })}>Analiza</option>
-                            <option name="idColumn" value={3} onChange={e=>dispatch({type:'change', element: value })}>Development</option>
-                            <option name="idColumn" value={4} onChange={e=>dispatch({type:'change', element: value })}>Testowanie</option>
-                            <option name="idColumn" value={5} onChange={e=>dispatch({type:'change', element: value })}>Zakończone</option>
+                            {optionList.map(({name, value, title})=> <option name={name} value={value} onChange={e=>dispatch({type:'change', element: e.target})}>{title}</option>)}
                         </select>
-                    </label>
-                    <label htmlFor="deadline">Termin realizacji<input className ="form__input" name="deadline" placeholder="RRRR-MM-DD" value={deadline} onChange={e=>dispatch({type:'change', element: e.target })}/></label>
-                    <input className= "btn" value= 'Dodaj' type="submit"/>    
+                    <label htmlFor="deadline" className="form__label">Termin realizacji</label><input className ="form__input" name="deadline" placeholder="RRRR-MM-DD" value={deadline} onChange={e=>dispatch({type:'change', element: e.target })}/>
+                    <input className= "form__btn btn" value= 'Dodaj' type="submit"/>    
                 </form>
             </section >{
                 err.length > 0 && <> 
