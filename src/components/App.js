@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Board from './Board';
 import Footer from './Footer';
 import {ItemContext, UpdateContext} from './context';
@@ -6,7 +6,6 @@ import {useStorage} from './Hooks';
 import '../styles/main.css';
 
 const App = () => {
-
     const init = {
         columns: [
             {id: 1, name: 'Do zrobienia', limit: 5},
@@ -34,19 +33,19 @@ const App = () => {
     }
 
     const updateTask = (newTask, action) => {
-        if (action == 'add') {
+        if (action === 'add') {
             let updatedData = {
                     columns: columns,
                     tasks: [...tasks, newTask]
             }
             updateData(updatedData);
-        } else if (action == 'remove') {
+        } else if (action === 'remove') {
             let updatedData = {
                 columns: columns,
                 tasks: tasks.filter(item=>item.id !== newTask.id)
             }
             updateData(updatedData);
-        } else if (action == 'moveRight') {
+        } else if (action === 'moveRight') {
             const copyTask = {...newTask, idColumn: Number(newTask.idColumn) + 1}
             let updatedData = {
                 columns: columns,
@@ -57,12 +56,12 @@ const App = () => {
                 })
             }
             updateData(updatedData); 
-            }  
+        }  
     }
     
     return (
-       <ItemContext.Provider value ={data}>
-           <UpdateContext.Provider value ={updateTask}>
+       <ItemContext.Provider value={data}>
+           <UpdateContext.Provider value={updateTask}>
                 <Board/>
                 <Footer/>
             </UpdateContext.Provider>

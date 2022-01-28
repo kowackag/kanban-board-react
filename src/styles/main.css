@@ -182,6 +182,7 @@ body {
     }
 
     .column {
+        /* display:flex; */
         margin: 20px 0;
         height: auto;
         width: 100%;
@@ -190,7 +191,17 @@ body {
 
 @media (max-width: 630px ) {
     .form {
-        grid-template-columns: 1fr ;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .form__label, .form__input {
+        margin: 0 0 15px;
+    }
+}
+
+@media (max-width: 400px ) {
+    .form {
+        grid-template-columns: 1fr;
     }
 
     .form__label, .form__input {
