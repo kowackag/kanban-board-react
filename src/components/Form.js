@@ -27,18 +27,19 @@ const Form = () => {
     
     const [state, dispatch] = useReducer(reducer, init);
     const {name, user, deadline, idColumn} = state;
+    const [isActive, setIsActive] = useState(true);
     const [err, setErr] = useState([])
     const {tasks, columns} = useContext(ItemContext);
     const updateTask = useContext(UpdateContext);
 
     const countTasksInColumn = (id) => {
-        const numberTasksInColumn = tasks.filter(item => Number(item.idColumn) === Number(id)).length;
+        const numberTasksInColumn = tasks.filter(item => Number(item.idColumn) == Number(id)).length;
         return numberTasksInColumn;
     }
 
     const checkIfIsUnderLimit = (newTask, columns) => {
         const {idColumn} = newTask;
-        const thatColumn = columns.find((item) => Number(idColumn) === Number(item.id));
+        const thatColumn = columns.find((item) => Number(idColumn) == Number(item.id));
         const {id, limit} = thatColumn;
         const tasksInColumn = countTasksInColumn(Number(id))
         return (tasksInColumn<limit) ? true : false
@@ -47,8 +48,10 @@ const Form = () => {
     const handleForm = (e) => {
         e.preventDefault();
         const errors = validateData(state);
+        setIsActive(true);
         if (errors.length === 0){
             if (checkIfIsUnderLimit(state, columns)) {
+                console.log('dd')
                 updateTask(state, 'add')
                 dispatch({type: 'reset'});
             } else alert('Przekroczono limit zadań w danej Fazie realizacji')
@@ -74,24 +77,21 @@ const Form = () => {
     ]
         
     return (
-        <>
-            <section className='section-form'>
-                <h3 className='section-form__title'>Dodaj zadanie</h3>
-                <form className ="form" onSubmit={(e)=> handleForm(e)}>
-                    {fields.map(({name, value, desc, placeholder})=><><label htmlFor={name} className="form__label">{desc}</label><input className ="form__input" name={name} value={value} placeholder={placeholder} onChange={e=>dispatch({type:'change', element: e.target })}/></> )}
-                    <label htmlFor="idColumn" className="form__label">Faza realizacji</label>
-                        <select className ="form__input" name="idColumn" value={idColumn} onChange={(e)=>dispatch({type:'change', element: e.target })}>
-                            {optionList.map(({name, value, title})=> <option name={name} value={value} onChange={e=>dispatch({type:'change', element: e.target})}>{title}</option>)}
-                        </select>
-                    <input className= "form__btn btn" value= 'Dodaj' type="submit"/> 
-                </form>
-            </section >{
-                err.length > 0 && <> 
+        <section className='section-form'>
+            <h3 className='section-form__title'>Dodaj zadanie</h3>
+            <form className ="form" onSubmit={(e)=> handleForm(e)}>
+                {fields.map(({name, value, desc, placeholder})=><React.Fragment key={name}><label className="form__label">{desc}</label><input className ="form__input" name={name} value={value} placeholder={placeholder} onChange={e=>dispatch({type:'change', element: e.target })}/></React.Fragment> )}
+                <label htmlFor="idColumn" className="form__label">Faza realizacji</label>
+                <select className ="form__input" name="idColumn" value={idColumn} onChange={(e)=>dispatch({type:'change', element: e.target })}>
+                {optionList.map(({name, value, title})=> <option name={name} value={value} key={value} onChange={e=>dispatch({type:'change', element: e.target})}>{title}</option>)}
+                </select>
+                <input className= "form__btn btn" value= 'Dodaj' type="submit"/> 
+            </form>{ 
+                (err.length > 0) && isActive && 
                 <section className="errors">
                 <h3 className="errors__title">Wprowadzono błędne dane:</h3>
-                <ul>{err.map(({text, id})=><li className="errors__item" key={id}>{text}</li>)}</ul> </section></>
-            }
-        </>
+                <ul>{err.map(({text, id})=><li className="errors__item" key={id}>{text}</li>)}</ul> <button onClick={()=>setIsActive(false)} className="errors__close">X</button></section>}
+        </section >
     )
 }
 

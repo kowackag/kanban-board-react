@@ -26,17 +26,17 @@ const Task = (props) => {
     }
 
     const countLimitInColumn = (id) => {
-        const limitTasksInColumn = columns.find(item => item.id===Number(id)).limit;
+        const limitTasksInColumn = columns.find(item => item.id==Number(id)).limit;
         return limitTasksInColumn;
     }
 
     return(
-        <ul>{props.tasks.map(({name, user, deadline, idColumn}) =>
+        <ul className="column__tasks">{props.tasks.map((el) =>
             <li className = "task" key = {uuid()}>
-                <h4 className = "task__title">{name}</h4>
-                <p className="task__user">{user}</p>
-                <p className="task__user"> {deadline}</p>
-                {idColumn < columns.length && <button className = "task__done btn" onClick = {() => moveRight(el)}><i className="fas fa-check"></i></button>}
+                <h4 className = "task__title">{el.name}</h4>
+                <p className="task__user">{el.user}</p>
+                <p className="task__date"> {el.deadline}</p>
+                {el.idColumn < columns.length && <button className = "task__done btn" onClick = {() => moveRight(el)}><i className="fas fa-check"></i></button>}
                 <button className = "task__remove btn" onClick = {() => removeTask(el)}><i className="far fa-trash-alt"></i></button>
             </li>
         )}</ul>

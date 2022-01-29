@@ -24,7 +24,7 @@ const App = () => {
         fromLocalStorage = init; 
     }
 
-    const [data, setData]= useState(fromLocalStorage)
+    const [data, setData] = useState(fromLocalStorage)
     const {columns, tasks} = data;
 
     const updateData = (data)=> {
