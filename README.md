@@ -64,6 +64,7 @@ App is available using the following addresses:
 
 ### **Screenshot:**
 
+![c](https://github.com/kowackag/kanban-board-react/blob/main/public/screen1.PNG)
 
 
 &nbsp;
