@@ -154,15 +154,15 @@ tasks: [
 
 #### Desktop 
 
-![](./public/screen1.jpg)
+![](./public/screen1.png)
 &nbsp;
 
 #### When Form encounters on errors:
-![](./public/errors.jpg)
+![](./public/errors.png)
 &nbsp;
 
 #### Tablet
-![](./public/tablet.jpg)
+![](./public/tablet.png)
 &nbsp;
 
 #### Mobile
