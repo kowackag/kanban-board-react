@@ -1,4 +1,4 @@
-![screen of your app](https://via.placeholder.com/1000x300)
+![](./public/top.jpg)
 
 # KANBAN BOARD (React and Hooks)
 
@@ -154,15 +154,15 @@ tasks: [
 
 #### Desktop 
 
-![](./public/screen1.png)
+![](./public/screen1.jpg)
 &nbsp;
 
 #### When Form encounters on errors:
-![](./public/errors.png)
+![](./public/errors.jpg)
 &nbsp;
 
 #### Tablet
-![](./public/tablet.png)
+![](./public/tablet.jpg)
 &nbsp;
 
 #### Mobile
