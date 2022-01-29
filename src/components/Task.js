@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {ItemContext, UpdateContext} from './context';
-import {v4 as uuid} from 'uuid';
 
 const Task = (props) => {
     const {tasks, columns} = useContext(ItemContext);
@@ -32,7 +31,7 @@ const Task = (props) => {
 
     return(
         <ul className="column__tasks">{props.tasks.map((el) =>
-            <li className = "task" key = {uuid()}>
+            <li className = "task" key = {el.id}>
                 <h4 className = "task__title">{el.name}</h4>
                 <p className="task__user">{el.user}</p>
                 <p className="task__date"> {el.deadline}</p>
