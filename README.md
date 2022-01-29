@@ -15,6 +15,7 @@
 [💡 My process](#💡-my-process)
   - [Technologies](#Technologies)
   - [Solutions provided in the project](#Solutions-provided-in-the-project)
+  - [Data Storage](#Data-storage)
   - [Useful resources](#useful-resources)
   - [Copyrights](#copyrights)
 
@@ -35,13 +36,13 @@ It was my first small project using `React` and `Hooks`.
 The challenge was to implement the Kanban system similar to this one: https://kanbanblog.com/explained/.
 &nbsp;
 
-To familarize the Kanban concept I recommend watching the [video]( https://www.youtube.com/watch?v=iVaFVa7HYj4&list=PLaD4FvsFdarR3oF1gp5_NmnlL-BQIE9sW&index=1).
+To familarize the Kanban concept I recommend watching the [video](https://www.youtube.com/watch?v=iVaFVa7HYj4&list=PLaD4FvsFdarR3oF1gp5_NmnlL-BQIE9sW&index=1).
 
 &nbsp;
 
 ### **Installation 💿**
 
-The project uses [node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [webpack](https://webpack.js.org/) and compiler [babel](https://babeljs.io/setup#installation) as well as package [JSON-server](https://www.npmjs.com/package/json-server) and [whatwg-fetch](https://github.com/github/fetch).
+The project uses [node](https://nodejs.org/en/), [npm](https://www.npmjs.com/), [webpack](https://webpack.js.org/) and compiler [babel](https://babeljs.io/setup#installation) as well as `ESLint` and `Prettier`.
 
 Having them installed, type into the terminal: 
 ```
@@ -62,6 +63,8 @@ App is available using the following addresses:
 &nbsp;
 
 ### **Screenshot:**
+
+
 
 &nbsp;
  
@@ -86,12 +89,9 @@ App is available using the following addresses:
     - The form was made using CSS Grid layout.
     - As the app is mainly used on desktop computers, it was prepared with a Desktop-first approach.
 - JS:
-    - To store all communication with the API in one place, the class ExcursionsAPI was created (in the separated file `ExcursionsAPI.js`).
-    - This class is used on both the `client` and` admin` sides and it was imported into both JS files responsible for each part.
-    - Communication with API is based on `fetch()` method.
-    - To run the project using browsers that do not support `fetch()` method, package `whatwg-fetch` was used.
+    - ES2015+ (arrow functions, destructuring, spread operator)
 - React:
-    - The following hooks was used: `useState`, `useContext` and `useReducer`.
+    - The following hooks were used: `useState`, `useContext` and `useReducer`.
     - Data is stored in `state` in the `<App /> ` and passed to the Components using the `Context API`.
 
 
@@ -105,15 +105,26 @@ Kanban board `<Board />` consists with a few Components:
 
 ### Data storage
 
-Na tym etapie chcemy wykorzystać najszybszą do implementacji możliwość zapisywania ustawień naszej tablic. Dlatego wybór padł na [localStorage](http://kursjs.pl/kurs/storage/storage.php). W ten sposób będzie można testować rozwiązanie nie musząc przejmować się zaawansowanymi rozwiązaniami.
+To save and store data the [localStorage](http://kursjs.pl/kurs/storage/storage.php) built into a web browser was used.
+&nbsp;
 
-Na pewno ułatwiłby Ci pracę hook, który udostępniałby metody umożliwiające zapis i odczyt danych z localStorage np.:
+The `hook useStorage()` was created, to provide methods for saving and reading data from localStorage:
 ```
-const [getItem, setItem] = useStorage('name');
+const useStorage = () => {
+    const setItem = (ob, name) => {
+        localStorage.setItem(name, JSON.stringify(ob))
+    }
+    const getItem = (name) => {
+        const retrivedObject = JSON.parse(localStorage.getItem(name));
+        return retrivedObject;
+    }
+    return [getItem, setItem];
 ```
 
-Dodatkowo przy pierwszym uruchomieniu należałoby pobrać dane z localStorage oraz przekazać dane do wnętrza aplikacji za pomocą Context API. Jeśli takich danych nie ma to trzeba ustawić wartości początkowe.
-
+The `hook` was used in `<App/>`:
+```
+const [getItem, setItem] = useStorage();
+```
 Data structure: 
 
 Columns with the name of the implementation stage, the limit of tasks and the identifier:
@@ -137,21 +148,11 @@ tasks: [
 ```
 ### **Useful resources:**
 
-- [Google Font](https://fonts.google.com/specimen/Poppins) - Font (`Poppins`)
+- [Kanban system](https://www.youtube.com/watch?v=iVaFVa7HYj4&list=PLaD4FvsFdarR3oF1gp5_NmnlL-BQIE9sW&index=1)
 - [Font Awesome](https://fontawesome.com/) - Icons. 
+- [localStorage](http://kursjs.pl/kurs/storage/storage.php)
 
-
-## Od czego zaczać?
-
-Najpierw utwórz strukturę danych wew. Twojej aplikacji i postaraj się wyświetlić wszystkie elementy wkorzystując odpowiednie komponenty. Dane możesz przechowywać w `state` w komponencie `<App />`, które przekazujesz przez Context API. Pamiętaj, że w ten sposób możesz też przekazywać metody, które będą aktualizować dane w `state`.
-
-Następnie zapisz dane w localStorage i sprawdź czy nadal wszystko działa.
-
-Potem dopiero postaraj sie przemieszczać zadania między kolumnami bez zapisywania danych w localStorage. Jak już wspomieliśmy wystarczy ikrementować lub dekrementować pole `idColumn`. Pamiętaj, aby sprawdzić czy limit zadań w kolumnie nie jest osiągnięty i czy kolumna "następna" oraz "poprzednia" istnieje.
-
-
-Dopiero teraz wprowadź aktualizację danych w localStorage. Zwróć uwagę, że każda zmiana `state` aplikacji powinna być zapisywana w localStorage.
-
+ 
 ## 🙋‍♂️ Author
 
 The project was made by Małgorzata Kowacka.
