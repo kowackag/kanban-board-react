@@ -10,7 +10,6 @@
   - [The challenge](#the-challenge)
   - [Instalation](#Installation-💿)
   - [Links](#links)
-  - [Screenshot](#screenshot)
 
 [💡 My process](#💡-my-process)
   - [Technologies](#Technologies)
@@ -18,6 +17,8 @@
   - [Data Storage](#Data-storage)
   - [Useful resources](#useful-resources)
   - [Copyrights](#copyrights)
+
+[Screenshot](#screenshot)
 
 [🙋‍♂️ Author](#🙋‍♂️-author)
 
@@ -60,12 +61,6 @@ App is available using the following addresses:
 
 ### **Links:**
 - [GitHub](https://github.com/kowackag/kanban-board-react.git)
-&nbsp;
-
-### **Screenshot:**
-
-![c](https://github.com/kowackag/kanban-board-react/blob/main/public/screen1.PNG)
-
 
 &nbsp;
  
@@ -153,7 +148,26 @@ tasks: [
 - [Font Awesome](https://fontawesome.com/) - Icons. 
 - [localStorage](http://kursjs.pl/kurs/storage/storage.php)
 
- 
+&nbsp;
+## **Screenshot:**
+&nbsp;
+
+#### Desktop 
+
+![](./public/screen1.png)
+&nbsp;
+
+#### When Form encounters on errors:
+![](./public/errors.png)
+&nbsp;
+
+#### Tablet
+![](./public/tablet.png)
+&nbsp;
+
+#### Mobile
+![](./public/mobile.jpg)
+
 ## 🙋‍♂️ Author
 
 The project was made by Małgorzata Kowacka.
