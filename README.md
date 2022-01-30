@@ -1,4 +1,4 @@
-![](./public/top.jpg)
+![](./public/Top.jpg)
 
 # KANBAN BOARD (React and Hooks)
 
@@ -14,7 +14,6 @@
 [💡 My process](#💡-my-process)
   - [Technologies](#Technologies)
   - [Solutions provided in the project](#Solutions-provided-in-the-project)
-  - [Data Storage](#Data-storage)
   - [Useful resources](#useful-resources)
   - [Copyrights](#copyrights)
 
@@ -38,6 +37,15 @@ The challenge was to implement the Kanban system similar to this one: https://ka
 &nbsp;
 
 To familarize the Kanban concept I recommend watching the [video](https://www.youtube.com/watch?v=iVaFVa7HYj4&list=PLaD4FvsFdarR3oF1gp5_NmnlL-BQIE9sW&index=1).
+
+The Kanban Board enables:
+
+- Create tasks;
+- Assign a person to the task;
+- Set deadline of the task;
+- Move defined tasks to the next columns with defined limits;
+- Save tasks to Local Storage;
+- Delete tasks from the Local Storage.
 
 &nbsp;
 
@@ -87,7 +95,7 @@ App is available using the following addresses:
 - JS:
     - ES2015+ (arrow functions, destructuring, spread operator)
 - React:
-    - The following hooks were used: `useState`, `useContext` and `useReducer`.
+    - The following hooks were used: `useState`, `useContext`, `useReducer` and `Custom Hook`.
     - Data is stored in `state` in the `<App /> ` and passed to the Components using the `Context API`.
 
 
@@ -97,14 +105,30 @@ Kanban board `<Board />` consists with a few Components:
 - `<Task />` to display all tasks, move them to the next stage or delete;
 - `<Footer />`
 
+Hook `useReducer` is used to control the form with user inputs. Thanks to destructuring it is possible to conveniently store data.
+
+```
+const reducer = (state, {type, element}) => {
+        switch (type) {
+        case 'reset':
+            return init;
+        case 'change':
+            const {name, value} = element;
+            return {...state, [name]:value};
+        default:
+            return state;
+        }
+    }
+```
+
 &nbsp;
 
-### Data storage
+#### Data storage
 
 To save and store data the [localStorage](http://kursjs.pl/kurs/storage/storage.php) built into a web browser was used.
 &nbsp;
 
-The `hook useStorage()` was created, to provide methods for saving and reading data from localStorage:
+The custom hook `useStorage` was created, to provide methods for saving and reading data from localStorage:
 ```
 const useStorage = () => {
     const setItem = (ob, name) => {
@@ -117,7 +141,7 @@ const useStorage = () => {
     return [getItem, setItem];
 ```
 
-The `hook` was used in `<App/>`:
+The hook `useStorage` was used in `<App/>`:
 ```
 const [getItem, setItem] = useStorage();
 ```
@@ -152,21 +176,8 @@ tasks: [
 ## **Screenshot:**
 &nbsp;
 
-#### Desktop 
-
-![](./public/screen1.jpg)
+![](./public/screen.jpg)
 &nbsp;
-
-#### When Form encounters on errors:
-![](./public/errors.jpg)
-&nbsp;
-
-#### Tablet
-![](./public/tablet.jpg)
-&nbsp;
-
-#### Mobile
-![](./public/mobile.jpg)
 
 ## 🙋‍♂️ Author
 

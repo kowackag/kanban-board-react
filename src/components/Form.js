@@ -13,12 +13,12 @@ const Form = () => {
         idColumn: 0
     }
 
-    const reducer = (state, action) => {
-        switch (action.type) {
+    const reducer = (state, {type, element}) => {
+        switch (type) {
         case 'reset':
             return init;
         case 'change':
-            const {name, value} = action.element;
+            const {name, value} = element;
             return {...state, [name]:value};
         default:
             return state;
