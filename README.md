@@ -195,6 +195,6 @@ Thanks to my [Mentor - devmentor.pl](https://devmentor.pl/) - for providing me w
 
 &nbsp;
 
-My next small project using REACT basics  [CLICK ME ](https://github.com/diet-form-and-calc-BMI) 
+My next small project using REACT basics  [CLICK ME ](https://github.com/kowackag/diet-form-and-calc-BMI) 
 
 ----
