@@ -68,6 +68,7 @@ App is available using the following addresses:
 &nbsp;
 
 ### **Links:**
+- [GitHub Pages](https://kowackag.github.io/kanban-react-pages/)
 - [GitHub](https://github.com/kowackag/kanban-board-react.git)
 
 &nbsp;
