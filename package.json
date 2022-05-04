@@ -1,15 +1,14 @@
 {
-  "name": "task-react-modern",
+  "homepage": "https://kowackag.github.io/kanban-board-react/",
+  "name": "kanban-board",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open",
-    "build": "webpack --mode production"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kowackag/task-react-modern.git"
+    "build": "webpack --mode production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +16,6 @@
   "bugs": {
     "url": "https://github.com/kowackag/task-react-modern/issues"
   },
-  "homepage": "https://github.com/kowackag/task-react-modern#readme",
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
@@ -41,7 +39,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.9.0",
+    "gh-pages": "^3.1.0"
   },
   "dependencies": {
     "prop-types": "^15.7.2",
