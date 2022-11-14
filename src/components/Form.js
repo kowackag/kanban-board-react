@@ -38,7 +38,7 @@ const Form = () => {
 
     const checkIfIsUnderLimit = (newTask, columnList) => {
         const { idColumn } = newTask;
-        const thatColumn = columnList && columnList.find(item => Number(idColumn) === Number(item.id));
+        const thatColumn = columnList.find(item => Number(idColumn) === Number(item.id));
         const { id, limit } = thatColumn;
         const tasksInColumn = countTasksInColumn(Number(id));
         return tasksInColumn < limit;
@@ -48,7 +48,7 @@ const Form = () => {
         e.preventDefault();
         const errors = validateData(state);
         setIsActive(true);
-        if (errors && errors.length === 0) {
+        if (errors.length === 0) {
             if (checkIfIsUnderLimit(state, columns)) {
                 updateTask(state, 'add');
                 dispatch({ type: 'reset' });
