@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Board from './Board';
 import Footer from './Footer';
 import {ItemContext, UpdateContext} from './context';
@@ -17,13 +17,11 @@ const App = () => {
         tasks: []
     }
 
+
     const [getItem, setItem] = useStorage();
 
-    let fromLocalStorage = getItem('data');
-    if (fromLocalStorage === null) {
-        fromLocalStorage = init; 
-    }
-
+    let fromLocalStorage = getItem('data') || init;
+    
     const [data, setData] = useState(fromLocalStorage)
     const {columns, tasks} = data;
 

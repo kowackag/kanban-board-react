@@ -1,6 +1,6 @@
 {
-  "homepage": "https://kowackag.github.com/kanban-board-react",
-  "name": "kanban-board-react",
+  "homepage": "https://kowackag.github.io/kanban-board-react/",
+  "name": "kanban-board",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
