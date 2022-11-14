@@ -51,7 +51,6 @@ const Form = () => {
         setIsActive(true);
         if (errors.length === 0){
             if (checkIfIsUnderLimit(state, columns)) {
-                console.log('dd')
                 updateTask(state, 'add')
                 dispatch({type: 'reset'});
             } else alert('Przekroczono limit zadań w danej Fazie realizacji')

@@ -49,7 +49,7 @@ const App = () => {
             const copyTask = {...newTask, idColumn: Number(newTask.idColumn) + 1}
             let updatedData = {
                 columns: columns,
-                tasks: tasks.map(item=> {
+                tasks: tasks && tasks.map(item=> {
                     if (item.id == newTask.id)  {
                         return copyTask
                     } else {return item}
