@@ -4,6 +4,7 @@ import Task from './Task';
 
 const Column = () => {
     const {tasks, columns} = useContext(ItemContext);
+    console.log(columns)
     return (
         <section className ="kanban-board">
             <h2 className ="kanban-board__title">Kanban</h2>

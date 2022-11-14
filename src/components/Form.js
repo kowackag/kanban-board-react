@@ -33,7 +33,7 @@ const Form = () => {
     const updateTask = useContext(UpdateContext);
 
     const countTasksInColumn = (id) => {
-        const numberTasksInColumn = tasks.filter(item => Number(item.idColumn) == Number(id)).length;
+        const numberTasksInColumn = tasks && tasks.filter(item => Number(item.idColumn) == Number(id)).length;
         return numberTasksInColumn;
     }
 
@@ -49,7 +49,7 @@ const Form = () => {
         e.preventDefault();
         const errors = validateData(state);
         setIsActive(true);
-        if (errors.length === 0){
+        if (errors && errors.length === 0){
             if (checkIfIsUnderLimit(state, columns)) {
                 updateTask(state, 'add')
                 dispatch({type: 'reset'});
