@@ -1,18 +1,15 @@
 {
   "homepage": "https://kowackag.github.io/kanban-board-react/",
-  "name": "kanban-board",
+  "name": "kanban-board-react",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open",
-    "build": "webpack --mode production",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
@@ -33,17 +30,18 @@
     "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^3.2.0",
     "prettier": "1.19.1",
+    "source-map-loader": "^1.0.0",
     "style-loader": "^2.0.0",
-    "url-loader": "^4.1.1",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.9.0",
-    "source-map-loader": "^1.0.0"
+    "url-loader": "^4.1.1"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-scripts": "5.0.1",
     "uuid": "^3.4.0"
   }
 }
