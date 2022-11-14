@@ -18,7 +18,7 @@ const Task = props => {
     };
 
     const countLimitInColumn = id => {
-        const limitTasksInColumn = columns.find(item => item.id === Number(id)).limit;
+        const limitTasksInColumn = columns.find(item => Number(item.id) === Number(id)).limit;
         return limitTasksInColumn;
     };
 
