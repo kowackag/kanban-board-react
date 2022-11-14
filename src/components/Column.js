@@ -14,12 +14,14 @@ const Column = () => {
         <section className="kanban-board">
             <h2 className="kanban-board__title">Kanban</h2>
             <ul className="kanban-board__column">
-                {columnList.map(el => (
-                    <li className="column" key={el.id}>
-                        <h3 className="column__title">{`${el.name}`}</h3>
-                        <Task tasks={tasks.filter(task => Number(task.idColumn) === Number(el.id))} />
-                    </li>
-                ))}
+                {columnList &&
+                    columnList.length &&
+                    columnList.map(el => (
+                        <li className="column" key={el.id}>
+                            <h3 className="column__title">{`${el.name}`}</h3>
+                            <Task tasks={tasks.filter(task => Number(task.idColumn) === Number(el.id))} />
+                        </li>
+                    ))}
             </ul>
         </section>
     );
