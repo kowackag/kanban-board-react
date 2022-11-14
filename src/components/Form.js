@@ -38,7 +38,7 @@ const Form = () => {
 
     const checkIfIsUnderLimit = (newTask, columnList) => {
         const { idColumn } = newTask;
-        const thatColumn = columnList.find(item => Number(idColumn) === Number(item.id));
+        const thatColumn = columnList && columnList.find(item => Number(idColumn) === Number(item.id));
         const { id, limit } = thatColumn;
         const tasksInColumn = countTasksInColumn(Number(id));
         return tasksInColumn < limit;
